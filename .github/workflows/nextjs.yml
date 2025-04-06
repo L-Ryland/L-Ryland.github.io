@@ -45,7 +45,13 @@ jobs:
             echo "runner=npx --no-install" >> $GITHUB_OUTPUT
             exit 0
           fi
-      - name: Setup Node
+      - name: Setup pnpm
+        if: steps.detect-package-manager.outputs.manager == 'pnpm'
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: false
+      - name: thSetup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
