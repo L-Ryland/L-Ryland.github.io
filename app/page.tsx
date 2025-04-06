@@ -14,6 +14,8 @@ export default function Home() {
           priority
         />
         <ol>
+          <li style={{}}>test</li>
+          <li text="red-500">Hello world</li>
           <li>
             Get started by editing <code>app/page.tsx</code>.
           </li>
