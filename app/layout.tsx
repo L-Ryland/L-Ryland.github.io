@@ -5,6 +5,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { Layout } from "@/components/ui/layout";
 import { SplashCursor } from "@/components/animations";
+import { GoogleAnalytics } from "@next/third-parties/google";
 // import 'uno.css'
 
 const geistSans = Geist({
@@ -35,6 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <GoogleAnalytics gaId={"G-RZ5K6683MJ"} />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${tangerineFonts.variable}`}
       >
