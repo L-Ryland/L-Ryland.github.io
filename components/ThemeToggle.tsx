@@ -24,15 +24,15 @@ export const ThemeToggle = () => {
         un-size="6"
         un-transition="~"
         un-dark="hidden"
-        un-fill="tranparent group-hover:teal-1"
-        stroke="teal-5 group-hover:teal-6"
+        un-fill="tranparent group-hover:teal-100"
+        stroke="teal-400 group-hover:teal-500"
       />
       <MoonStar
         un-light="hidden"
         un-dark="block"
         un-transition="~"
-        un-fill="zinc-7"
-        un-stroke="zinc-5 dark:group-hover:zinc-4"
+        un-fill="zinc-700"
+        un-stroke="zinc-500 dark:group-hover:zinc-400"
         un-size="6"
       />
     </button>

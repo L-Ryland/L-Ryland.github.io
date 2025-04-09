@@ -6,20 +6,21 @@ import { Providers } from "./providers";
 import { Layout } from "@/components/ui/layout";
 import { SplashCursor } from "@/components/animations";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { cx } from "@emotion/css";
 // import 'uno.css'
 
 const geistSans = Geist({
-  variable: "--font-sans",
+  variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-mono",
+  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
 const tangerineFonts = Tangerine({
-  variable: "--font-serif",
+  variable: "--font-tangerine",
   subsets: ["latin"],
   weight: ["400"],
 });
@@ -38,7 +39,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <GoogleAnalytics gaId={"G-RZ5K6683MJ"} />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${tangerineFonts.variable}`}
+        className={cx(
+          geistSans.variable,
+          geistMono.variable,
+          tangerineFonts.variable,
+        )}
       >
         <Providers>
           <SplashCursor />

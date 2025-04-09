@@ -5,6 +5,7 @@ import {
   presetIcons,
   presetWind3,
   presetWind4,
+  presetWebFonts,
   transformerVariantGroup,
 } from "unocss";
 
@@ -22,6 +23,27 @@ export default defineConfig({
       attributifyPseudo: false,
     }),
     presetAttributify(),
+    presetWebFonts({
+      themeKey: "font",
+      provider: {
+        name: "none",
+        getPreflight: (fonts) => {
+          let result = [];
+          for (const { name } of fonts) {
+            result.push(`@font-face {
+              font-family: ${name};
+              src: local(${name}) format("woff2");
+            }`);
+          }
+          return result.join("\n");
+        },
+      },
+      fonts: {
+        serif: ["Tangerine"],
+        sans: ["Geist"],
+        mono: ["Geist Mono"],
+      },
+    }),
     presetTypography(),
     presetIcons({
       collections: {
@@ -43,7 +65,31 @@ export default defineConfig({
       },
     }),
   ],
-  theme: {},
+  theme: {
+    animation: {
+      keyframes: {
+        shine: `{
+          0% { background-position: 100%; }
+          100% { background-position: -100%; }
+        }`,
+        custom:
+          "{0%, 100% { transform: scale(0.5); } 50% { transform: scale(1); }}",
+      },
+      durations: {
+        shine: "5s",
+      },
+      timingFns: {
+        shine: "linear",
+      },
+      counts: {
+        shine: "infinite",
+      },
+      category: {
+        shine: "shine",
+        custom: "Zooming",
+      },
+    },
+  },
   rules: [
     ["w-screen", { width: "100dvw" }],
     ["h-screen", { height: "100dvh" }],

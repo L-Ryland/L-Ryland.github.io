@@ -2,7 +2,7 @@ import { Button, Container } from "@/components/ui";
 import Newsletter from "./Newsletter";
 import Resume from "./Resume";
 import Photos from "./Photos";
-import { BlurText } from "@/components/animations";
+import { BlurText, ShinyText } from "@/components/animations";
 import Link, { LinkProps } from "next/link";
 import type { FC } from "react";
 import { ArrowDown } from "lucide-react";
@@ -26,7 +26,7 @@ export default async function Home() {
       <Container className="mt-9">
         <div className="max-w-2xl">
           <BlurText
-            un-text="5xl zin-800 dark:zin-100"
+            un-text="5xl zinc-800 dark:zinc-100"
             un-font="bold"
             text="This is Ryland"
             as={"h1"}
@@ -62,7 +62,12 @@ export default async function Home() {
             variant="secondary"
             className="group mt-6 max-w-xl"
           >
-            Download CV
+            <ShinyText
+              text={"Download CV"}
+              disabled={false}
+              speed={3}
+              un-text="zinc-100 dark:zinc-100/70"
+            />
             <ArrowDown
               un-size="3.5"
               un-transition="~"
