@@ -32,7 +32,14 @@ export default async function Home() {
             as={"h1"}
           />
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I"m a Software Engineer who loves to create a better world.
+            I'm a cognitively structured, high-intuition thinker with deep but
+            non-expressive emotions. <br />
+            My nervous system is highly sensitive to emotional incoherence in
+            others. <br />
+            That contributes to my desire of becoming a Software Engineer. Along
+            with my passion for technology,
+            <br />
+            I'm also a big fan of psychology, neurology, or ... music?
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink

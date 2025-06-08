@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface ColorRGB {
   r: number;
@@ -75,11 +75,11 @@ export default function SplashCursor({
     if (!canvas) return; // Guard canvas early
 
     // Pointer and config setup
-    const pointers: Pointer[] = [pointerPrototype()];
+    let pointers: Pointer[] = [pointerPrototype()];
 
     // All these are guaranteed numbers due to destructuring defaults
     // So we cast them to remove TS warnings:
-    const config = {
+    let config = {
       SIM_RESOLUTION: SIM_RESOLUTION!,
       DYE_RESOLUTION: DYE_RESOLUTION!,
       CAPTURE_RESOLUTION: CAPTURE_RESOLUTION!,
@@ -316,7 +316,7 @@ export default function SplashCursor({
     }
 
     function getUniforms(program: WebGLProgram) {
-      const uniforms: Record<string, WebGLUniformLocation | null> = {};
+      let uniforms: Record<string, WebGLUniformLocation | null> = {};
       const uniformCount = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
       for (let i = 0; i < uniformCount; i++) {
         const uniformInfo = gl.getActiveUniform(program, i);
@@ -984,7 +984,7 @@ export default function SplashCursor({
       const w = gl.drawingBufferWidth;
       const h = gl.drawingBufferHeight;
       const aspectRatio = w / h;
-      const aspect = aspectRatio < 1 ? 1 / aspectRatio : aspectRatio;
+      let aspect = aspectRatio < 1 ? 1 / aspectRatio : aspectRatio;
       const min = Math.round(resolution);
       const max = Math.round(resolution * aspect);
       if (w > h) {
@@ -1005,6 +1005,7 @@ export default function SplashCursor({
     let lastUpdateTime = Date.now();
     let colorUpdateTimer = 0.0;
 
+    let handle: number;
     function updateFrame() {
       const dt = calcDeltaTime();
       if (resizeCanvas()) initFramebuffers();
@@ -1012,7 +1013,7 @@ export default function SplashCursor({
       applyInputs();
       step(dt);
       render(null);
-      requestAnimationFrame(updateFrame);
+      handle = requestAnimationFrame(updateFrame);
     }
 
     function calcDeltaTime() {
@@ -1520,6 +1521,12 @@ export default function SplashCursor({
         updatePointerUpData(pointer);
       }
     });
+
+    return () => {
+      if (handle) {
+        self.cancelAnimationFrame(handle);
+      }
+    };
     // ------------------------------------------------------------
   }, [
     SIM_RESOLUTION,
