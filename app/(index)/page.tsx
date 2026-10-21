@@ -49,12 +49,11 @@ I'm also a big fan of psychology, neurology, or ... music?
     },
   ],
   resume: {
-    url: "https://raw.githubusercontent.com/L-Ryland/ryland-resume/refs/heads/resume/fullstack/resume.frontend.pdf",
+    url: "/assets/FullStackEngineer_RylandLiu_CV.pdf",
     filename: "RylandLiu_CV.pdf",
   },
 };
 export default async function Home() {
-  const resumeExchangeUrl = `/api/asset-exchange?${new URLSearchParams(introduction.resume)}`;
   return (
     <>
       <Container className="mt-9">
@@ -79,7 +78,7 @@ export default async function Home() {
             ))}
           </div>
           <Button
-            href={resumeExchangeUrl}
+            href={introduction.resume.url}
             download={"RylandLiu_CV.pdf"}
             target="_blank"
             variant="secondary"
