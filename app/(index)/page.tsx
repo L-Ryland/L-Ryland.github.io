@@ -1,8 +1,9 @@
-import { Button, Container } from "@/components/ui";
+import { Container } from "@/components/ui";
 import Newsletter from "./Newsletter";
 import Resume from "./Resume";
 import Photos from "./Photos";
-import { BlurText, ShinyText } from "@/components/animations";
+import RemoteDownload from "@/components/RemoteDownload";
+import { BlurText } from "@/components/animations";
 import Link, { LinkProps } from "next/link";
 import type { FC } from "react";
 import { ArrowDown } from "lucide-react";
@@ -54,7 +55,6 @@ I'm also a big fan of psychology, neurology, or ... music?
   },
 };
 export default async function Home() {
-  const resumeExchangeUrl = `/api/asset-exchange?${new URLSearchParams(introduction.resume)}`;
   return (
     <>
       <Container className="mt-9">
@@ -78,25 +78,18 @@ export default async function Home() {
               />
             ))}
           </div>
-          <Button
-            href={resumeExchangeUrl}
-            download={"RylandLiu_CV.pdf"}
-            target="_blank"
-            variant="secondary"
+          <RemoteDownload
+            url={introduction.resume.url}
+            filename={introduction.resume.filename}
             className="group mt-6 max-w-xl"
           >
-            <ShinyText
-              text="Download CV"
-              disabled={false}
-              speed={3}
-              un-text="zinc-100 dark:zinc-100/70"
-            />
+            Download CV
             <ArrowDown
               un-size="3.5"
               un-transition="~"
               un-stroke="zin-400 group-active:zinc-600 dark:group-hover:white dark:group-active:zinc-50"
             />
-          </Button>
+          </RemoteDownload>
         </div>
       </Container>
       <Photos />
