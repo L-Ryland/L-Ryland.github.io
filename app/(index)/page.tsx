@@ -17,10 +17,44 @@ const SocialLink: FC<{ icon: string } & LinkProps> = ({ icon, ...props }) => {
     </Link>
   );
 };
-export default async function Home() {
-  // let articles = (await getAllArticles()).slice(0, 4);
-  // let articles = [];
 
+const introduction = {
+  title: "This is Ryland",
+  description: `
+I'm a cognitively structured, high-intuition thinker with deep but non-expressive emotions.
+My nervous system is highly sensitive to emotional incoherence in others.
+That contributes to my desire of becoming a Software Engineer. Along with my passion for technology,
+I'm also a big fan of psychology, neurology, or ... music?
+  `,
+  socialLinks: [
+    {
+      platform: "X",
+      url: "https://x.com/RylandLiu",
+      icon: "i-ri-twitter-x-line",
+    },
+    {
+      platform: "Instagram",
+      url: "https://www.instagram.com/rylandliu.io",
+      icon: "i-ri-instagram-line",
+    },
+    {
+      platform: "Github",
+      url: "https://github.com/L-Ryland",
+      icon: "i-ri-github-fill",
+    },
+    {
+      platform: "LinkedIn",
+      url: "https://www.linkedin.com/in/ryland-liu",
+      icon: "i-ri-linkedin-box-fill",
+    },
+  ],
+  resume: {
+    url: "https://raw.githubusercontent.com/L-Ryland/ryland-resume/refs/heads/resume/fullstack/resume.frontend.pdf",
+    filename: "RylandLiu_CV.pdf",
+  },
+};
+export default async function Home() {
+  const resumeExchangeUrl = `/api/asset-exchange?${new URLSearchParams(introduction.resume)}`;
   return (
     <>
       <Container className="mt-9">
@@ -28,49 +62,31 @@ export default async function Home() {
           <BlurText
             un-text="5xl zinc-800 dark:zinc-100"
             un-font="bold"
-            text="This is Ryland"
-            as={"h1"}
+            text={introduction.title}
+            as="h1"
           />
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I'm a cognitively structured, high-intuition thinker with deep but
-            non-expressive emotions. <br />
-            My nervous system is highly sensitive to emotional incoherence in
-            others. <br />
-            That contributes to my desire of becoming a Software Engineer. Along
-            with my passion for technology,
-            <br />
-            I'm also a big fan of psychology, neurology, or ... music?
+          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400 whitespace-pre-line">
+            {introduction.description}
           </p>
           <div className="mt-6 flex gap-6">
-            <SocialLink
-              href="https://x.com/RylandLiu"
-              aria-label="Follow on X"
-              icon="i-ri-twitter-x-line"
-            />
-            <SocialLink
-              href="https://www.instagram.com/rylandlewes/"
-              aria-label="Follow on Instagram"
-              icon="i-ri-instagram-line"
-            />
-            <SocialLink
-              href="https://github.com/L-Ryland"
-              aria-label="Follow on GitHub"
-              icon="i-ri-github-fill"
-            />
-            <SocialLink
-              href="https://www.linkedin.com/in/ryland-liu"
-              aria-label="Follow on LinkedIn"
-              icon="i-ri-linkedin-box-fill"
-            />
+            {introduction.socialLinks.map(({ platform, url, icon }) => (
+              <SocialLink
+                key={platform}
+                href={url}
+                aria-label={`Follow on ${platform}`}
+                icon={icon}
+              />
+            ))}
           </div>
           <Button
-            href="/assets/FullStackEngineer_RylandLiu_CV.pdf"
+            href={resumeExchangeUrl}
+            download={"RylandLiu_CV.pdf"}
             target="_blank"
             variant="secondary"
             className="group mt-6 max-w-xl"
           >
             <ShinyText
-              text={"Download CV"}
+              text="Download CV"
               disabled={false}
               speed={3}
               un-text="zinc-100 dark:zinc-100/70"
